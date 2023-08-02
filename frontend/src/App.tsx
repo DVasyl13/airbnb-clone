@@ -1,12 +1,23 @@
-import React from 'react';
+import React, {Fragment}  from 'react';
 import './App.css';
+import {RequireAuth} from "react-auth-kit";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
+import RootLayout from "./layouts/RootLayout";
 
-function App() {
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <RootLayout/>,
+    children: [
+
+    ]
+  }
+]);
+
+const App = () => {
   return (
-    <div >
-
-    </div>
+      <RouterProvider router={router}/>
   );
-}
+};
 
 export default App;
