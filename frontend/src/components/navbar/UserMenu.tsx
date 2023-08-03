@@ -14,8 +14,6 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({
    currentUser
 }) => {
-    //const router = useRouter();
-
     const loginModal = useLoginModal();
     const registerModal = useRegisterModal();
     //const rentModal = useRentModal();
@@ -74,7 +72,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                 >
                     <AiOutlineMenu />
                     <div className="hidden md:block">
-                        {/*<Avatar src={currentUser?.image} />*/}
+                        <Avatar src={currentUser?.image} />
                     </div>
                 </div>
             </div>

@@ -3,12 +3,7 @@ import { useMemo } from 'react';
 import { BiSearch } from 'react-icons/bi';
 //import { differenceInDays } from 'date-fns';
 
-
-
 const Search = () => {
-
-
-
 
     return (
         <div
@@ -40,6 +35,7 @@ const Search = () => {
                         px-6
                     "
                 >
+                    Anywhere
                     {/*{locationLabel}*/}
                 </div>
                 <div
@@ -54,6 +50,7 @@ const Search = () => {
                         text-center
                     "
                 >
+                    Any week
                     {/*{durationLabel}*/}
                 </div>
                 <div
@@ -68,7 +65,10 @@ const Search = () => {
                         gap-3
                     "
                 >
-                    {/*<div className="hidden sm:block">{guestLabel}</div>*/}
+                    <div className="hidden sm:block">
+                        Any guest
+                        {/*{guestLabel}*/}
+                    </div>
                     <div
                         className="
                             p-2

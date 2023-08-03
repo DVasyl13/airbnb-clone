@@ -16,12 +16,17 @@ import Heading from "../Heading";
 import Button from "../Button";
 import useLoginModal from "../../hooks/useLoginModal";
 import useRegisterModal from "../../hooks/useRegisterModal";
+import doLogin from "../../api/login";
+import {useSignIn} from "react-auth-kit";
+import {useUser} from "../../hooks/useUser";
 
 const LoginModal = () => {
     const navigator = useNavigate();
     const loginModal = useLoginModal();
     const registerModal = useRegisterModal();
     const [isLoading, setIsLoading] = useState(false);
+    const signIn = useSignIn();
+    const userContext = useUser();
 
     const {
         register,
@@ -40,27 +45,25 @@ const LoginModal = () => {
         (data) => {
             setIsLoading(true);
 
-            // signIn('credentials', {
-            //     ...data,
-            //     redirect: false,
-            // })
-            //     .then((callback) => {
-            //         setIsLoading(false);
-            //
-            //         if (callback?.ok) {
-            //             toast.success('Logged in');
-            //
-            //             //??
-            //             navigator(window.location.href);
-            //
-            //             loginModal.onClose();
-            //         }
-            //
-            //         if (callback?.error) {
-            //             toast.error(callback.error);
-            //         }
-            //     });
-        }
+            doLogin(data).then(({ response, responseBody }) => {
+                toast.success('Welcome Back!');
+                sessionStorage.setItem("jwt", responseBody.token);
+                sessionStorage.setItem("rjwt", responseBody.refreshToken);
+                userContext.setUser(responseBody.user);
+
+                signIn({
+                    token: responseBody.token,
+                    expiresIn: 3600 * 24,
+                    tokenType: "Bearer",
+                    authState: {email: data.email},
+                });
+                loginModal.onClose();
+            }).catch((error) => {
+                toast.error(error);
+            }).finally(() => {
+                setIsLoading(false);
+            });
+    }
 
     const onToggle = useCallback(() => {
         loginModal.onClose();

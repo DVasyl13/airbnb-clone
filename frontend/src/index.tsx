@@ -4,6 +4,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import {AuthProvider} from "react-auth-kit";
+import {UserProvider} from "./storage/UserProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
@@ -15,9 +16,9 @@ root.render(
                   cookieDomain={window.location.hostname}
                   cookieSecure={false}
     >
-        {/*<UserContextProvider>*/}
+        <UserProvider>
             <App/>
-        {/*</UserContextProvider>*/}
+        </UserProvider>
     </AuthProvider>
 );
 

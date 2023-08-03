@@ -2,8 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-html,
-body,
+main,
 :root {
     height: 100%;
     font-family: 'Nunito Sans';
