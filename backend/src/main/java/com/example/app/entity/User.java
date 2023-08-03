@@ -58,6 +58,8 @@ public class User implements UserDetails {
         this.name = name;
         this.password = password;
         this.email = email;
+        this.createdAt = new Date();
+        this.updatedAt = new Date();
         this.userRole = role;
         this.isLocked = false;
         this.isExpired = false;

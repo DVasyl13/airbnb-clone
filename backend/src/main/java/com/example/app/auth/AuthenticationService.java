@@ -44,11 +44,10 @@ public class AuthenticationService {
         if (userRepository.findByEmail(request.email()).isPresent()) {
             throw new UserAlreadyExistException(request.email());
         }
-
         User user = new User(request.name(),
                 passwordEncoder.encode(request.password()),
                 request.email(), UserRole.USER);
-        user.setIsEnable(false);
+        //user.setIsEnable(false);
         User savedUser = userRepository.save(user);
         String jwtToken = getJwtToken(user);
         String refreshToken = jwtService.generateRefreshToken(user);
@@ -65,7 +64,6 @@ public class AuthenticationService {
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
         User user = userRepository.findByEmail(request.email())
                 .orElseThrow(() -> new UsernameNotFoundException("User with [" + request.email() + "] was not found"));
-
         if (!passwordEncoder.matches(request.password(), user.getPassword())) {
             throw new WrongPasswordException(request.email());
         }
