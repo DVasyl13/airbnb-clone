@@ -6,6 +6,9 @@ import Avatar from "../Avatar";
 import useLoginModal from "../../hooks/useLoginModal";
 import useRegisterModal from "../../hooks/useRegisterModal";
 import {AppUser} from "../../types/AppUser";
+import {useSignOut} from "react-auth-kit";
+import {useUser} from "../../hooks/useUser";
+import {toast} from "react-hot-toast";
 
 interface UserMenuProps {
     currentUser?: AppUser | null
@@ -14,7 +17,9 @@ interface UserMenuProps {
 const UserMenu: React.FC<UserMenuProps> = ({
    currentUser
 }) => {
+    const signOut = useSignOut();
     const loginModal = useLoginModal();
+    const userContext = useUser();
     const registerModal = useRegisterModal();
     //const rentModal = useRentModal();
 
@@ -24,11 +29,19 @@ const UserMenu: React.FC<UserMenuProps> = ({
         setIsOpen((value) => !value);
     }, []);
 
+    const logOut = () => {
+        sessionStorage.removeItem('jwt');
+        sessionStorage.removeItem('rjwt');
+        userContext.setUser(null);
+        signOut();
+        //TODO: make a call to logout on Backend also
+    }
+
     // const onRent = useCallback(() => {
     //     if (!currentUser) {
     //         return loginModal.onOpen();
     //     }
-
+    //
     //     rentModal.onOpen();
     // }, [loginModal, rentModal, currentUser]);
 
@@ -117,7 +130,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                                 <hr />
                                 <MenuItem
                                     label="Logout"
-                                    onClick={() => {}}
+                                    onClick={logOut}
                                 />
                             </>
                         ) : (

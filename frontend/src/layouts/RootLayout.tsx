@@ -6,9 +6,11 @@ import {useUser} from "../hooks/useUser";
 import {useEffect} from "react";
 import getCurrentUser from "../actions/getCurrentUser";
 import {toast} from "react-hot-toast";
+import ToasterProvider from "../storage/ToasterProvider";
 
 const RootLayout = () => {
     const userContext = useUser();
+
     useEffect(() => {
         const userToken = sessionStorage.getItem("jwt");
         if (userToken) {
@@ -22,6 +24,7 @@ const RootLayout = () => {
     }, []);
 
     return <>
+        <ToasterProvider/>
         <LoginModal/>
         <RegisterModal/>
         <Navbar currentUser={userContext.user} />

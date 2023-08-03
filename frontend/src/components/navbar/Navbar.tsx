@@ -5,6 +5,7 @@ import Search from "./Search";
 import UserMenu from "./UserMenu";
 import React from "react";
 import {AppUser} from "../../types/AppUser";
+import Categories from "./Categories";
 
 interface NavbarProps {
     currentUser?: AppUser | null;
@@ -13,7 +14,6 @@ interface NavbarProps {
 const Navbar: React.FC<NavbarProps> = ({
      currentUser,
 }) => {
-    console.log(currentUser);
     return (
         <div className="fixed w-full bg-white z-10 shadow-sm">
             <div
@@ -39,7 +39,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     </div>
                 </Container>
             </div>
-            {/*<Categories />*/}
+            <Categories />
         </div>
     );
 }

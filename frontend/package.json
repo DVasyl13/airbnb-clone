@@ -10,6 +10,7 @@
     "@types/node": "^16.18.39",
     "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
+    "query-string": "^8.1.0",
     "react": "^18.2.0",
     "react-auth-kit": "^2.12.5",
     "react-dom": "^18.2.0",
