@@ -19,7 +19,6 @@ public class UserService {
 
     @Transactional
     public User getUserFromJwt(HttpServletRequest request) {
-        System.out.println("getUserFromJwt");
         return getUserFromRequest(request);
     }
 

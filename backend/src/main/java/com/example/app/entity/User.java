@@ -33,7 +33,7 @@ public class User implements UserDetails {
     private String email;
 
     @Column(name = "image")
-    private byte[] image;
+    private String image;
     private Date createdAt;
     private Date updatedAt;
     private Boolean isEnable;
@@ -46,6 +46,16 @@ public class User implements UserDetails {
     @JsonBackReference
     @JsonIgnore
     private Set<Token> tokens;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JsonIgnore
+    private Set<Listing> listings;
+
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @JsonBackReference
+    @JsonIgnore
+    private Set<Reservation> reservations;
 
     public User(Long id) {
         this.id = id;
@@ -68,7 +78,7 @@ public class User implements UserDetails {
 
     public User(Long id, String username,
                 String password, String email,
-                Boolean isEnable, byte[] image,
+                Boolean isEnable, String image,
                 Date createdAt, Date updatedAt,
                 Boolean isExpired, Boolean isLocked,
                 UserRole userRole) {
