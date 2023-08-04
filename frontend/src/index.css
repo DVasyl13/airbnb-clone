@@ -2,8 +2,26 @@
 @tailwind components;
 @tailwind utilities;
 
-main,
+html,
+body,
 :root {
     height: 100%;
     font-family: 'Nunito Sans';
+}
+
+
+.leaflet-bottom,
+.leaflet-control,
+.leaflet-pane,
+.leaflet-top {
+    z-index: 0 !important;
+}
+
+.rdrMonth {
+    width: 100% !important;
+}
+
+.rdrCalendarWrapper {
+    font-size: 16px !important;
+    width: 100% !important;
 }

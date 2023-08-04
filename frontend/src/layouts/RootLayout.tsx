@@ -7,6 +7,7 @@ import {useEffect} from "react";
 import getCurrentUser from "../actions/getCurrentUser";
 import {toast} from "react-hot-toast";
 import ToasterProvider from "../storage/ToasterProvider";
+import RentModal from "../components/modals/RentModal";
 
 const RootLayout = () => {
     const userContext = useUser();
@@ -15,7 +16,6 @@ const RootLayout = () => {
         const userToken = sessionStorage.getItem("jwt");
         if (userToken) {
             getCurrentUser().then(({ response, responseBody }) => {
-                toast.success('Welcome Back!');
                 userContext.setUser(responseBody);
             }).catch((error) => {
                 toast.error(error);
@@ -25,6 +25,7 @@ const RootLayout = () => {
 
     return <>
         <ToasterProvider/>
+        <RentModal/>
         <LoginModal/>
         <RegisterModal/>
         <Navbar currentUser={userContext.user} />

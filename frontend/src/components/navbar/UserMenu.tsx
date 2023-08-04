@@ -9,6 +9,7 @@ import {AppUser} from "../../types/AppUser";
 import {useSignOut} from "react-auth-kit";
 import {useUser} from "../../hooks/useUser";
 import {toast} from "react-hot-toast";
+import useRentModal from "../../hooks/useRentModal";
 
 interface UserMenuProps {
     currentUser?: AppUser | null
@@ -21,7 +22,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
     const loginModal = useLoginModal();
     const userContext = useUser();
     const registerModal = useRegisterModal();
-    //const rentModal = useRentModal();
+    const rentModal = useRentModal();
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -34,22 +35,23 @@ const UserMenu: React.FC<UserMenuProps> = ({
         sessionStorage.removeItem('rjwt');
         userContext.setUser(null);
         signOut();
+        toast.success('Now you logged out!');
         //TODO: make a call to logout on Backend also
     }
 
-    // const onRent = useCallback(() => {
-    //     if (!currentUser) {
-    //         return loginModal.onOpen();
-    //     }
-    //
-    //     rentModal.onOpen();
-    // }, [loginModal, rentModal, currentUser]);
+    const onRent = useCallback(() => {
+        if (!currentUser) {
+            return loginModal.onOpen();
+        }
+
+        rentModal.onOpen();
+    }, [loginModal, rentModal, currentUser]);
 
     return (
         <div className="relative">
             <div className="flex flex-row items-center gap-3">
                 <div
-                    //onClick={onRent}
+                    onClick={onRent}
                     className="
                         hidden
                         md:block

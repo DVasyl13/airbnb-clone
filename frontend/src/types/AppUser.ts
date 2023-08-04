@@ -3,4 +3,5 @@ export interface AppUser {
     name: string
     image: string
     email: string
+    favoriteIds: String[]
 }
