@@ -1,6 +1,7 @@
 package com.example.app.controller.dto;
 
-public record ListingDto(double price,
+public record ListingDto(Long id,
+                         double price,
                          String title,
                          String description,
                          LocationDto location,
@@ -8,5 +9,5 @@ public record ListingDto(double price,
                          int roomCount,
                          int guestCount,
                          int bathroomCount,
-                         String image) {
+                         String imageSrc) {
 }

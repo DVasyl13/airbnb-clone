@@ -10,8 +10,7 @@ import java.util.Date;
 @Table(name = "reservation")
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
+@ToString(exclude = {"user", "listing"})
 @NoArgsConstructor
 public class Reservation {
     @Id

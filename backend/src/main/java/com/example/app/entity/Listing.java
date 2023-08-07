@@ -12,8 +12,7 @@ import java.util.Set;
 @Entity
 @Table(name = "listing")
 @Getter @Setter
-@ToString
-@EqualsAndHashCode
+@ToString(exclude = {"user", "users", "location", "reservations"})
 @NoArgsConstructor
 public class Listing {
     @Id
@@ -28,7 +27,7 @@ public class Listing {
     private Date createdAt;
     private int guestCount;
     private int bathroomCount;
-    private String image;
+    private String imageSrc;
     public Listing(double price,
                    String title,
                    String description,
@@ -36,7 +35,7 @@ public class Listing {
                    int roomCount,
                    int guestCount,
                    int bathroomCount,
-                   String image) {
+                   String imageSrc) {
         this.price = price;
         this.description = description;
         this.title = title;
@@ -44,7 +43,7 @@ public class Listing {
         this.roomCount = roomCount;
         this.guestCount = guestCount;
         this.bathroomCount = bathroomCount;
-        this.image = image;
+        this.imageSrc = imageSrc;
         this.createdAt = new Date();
     }
 
@@ -52,6 +51,10 @@ public class Listing {
     @JoinColumn(name = "user_id")
     @JsonManagedReference
     private User user;
+
+    @ManyToMany(mappedBy = "favourites")
+    @JsonBackReference
+    private Set<User> users;
 
     @OneToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id")

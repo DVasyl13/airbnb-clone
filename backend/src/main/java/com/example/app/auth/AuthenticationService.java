@@ -12,6 +12,7 @@ import com.example.app.security.JwtService;
 import com.example.app.security.token.Token;
 import com.example.app.security.token.TokenRepository;
 import com.example.app.security.token.TokenType;
+import com.example.app.utils.Mapper;
 import com.example.app.utils.UserRole;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
@@ -53,7 +54,7 @@ public class AuthenticationService {
         String refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
         //publisher.publishEvent(new RegistrationCompleteEvent(user, jwtToken, getApplicationUrl(httpRequest)));
-        return new AuthenticationResponse(jwtToken, refreshToken, savedUser);
+        return new AuthenticationResponse(jwtToken, refreshToken, Mapper.mapUser(savedUser, null));
     }
 
 //    private String getApplicationUrl(HttpServletRequest request) {
@@ -75,7 +76,7 @@ public class AuthenticationService {
         String refreshToken = jwtService.generateRefreshToken(user);
         revokeAllUserTokens(user);
         saveUserToken(user, jwtToken);
-        return new AuthenticationResponse(jwtToken, refreshToken, user);
+        return new AuthenticationResponse(jwtToken, refreshToken, Mapper.mapUser(user));
     }
 
     private String getJwtToken(User user) {

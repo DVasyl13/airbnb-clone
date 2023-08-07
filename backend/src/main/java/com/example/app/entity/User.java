@@ -4,6 +4,7 @@ import com.example.app.security.token.Token;
 import com.example.app.utils.UserRole;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.NaturalId;
@@ -19,8 +20,7 @@ import java.util.Set;
 @Table(name = "user")
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
+@ToString(exclude = {"listings", "favourites", "reservations", "tokens"})
 @NoArgsConstructor
 @Entity
 public class User implements UserDetails {
@@ -51,6 +51,15 @@ public class User implements UserDetails {
     @JsonBackReference
     @JsonIgnore
     private Set<Listing> listings;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_liked_listing",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "listing_id") }
+    )
+    @JsonManagedReference
+    private Set<Listing> favourites;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     @JsonBackReference

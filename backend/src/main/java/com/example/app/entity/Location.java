@@ -4,13 +4,13 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "location")
 @Getter
 @Setter
-@ToString
-@EqualsAndHashCode
+@ToString(exclude = "location")
 @NoArgsConstructor
 public class Location {
     @Id
@@ -32,7 +32,9 @@ public class Location {
         this.label = label;
         this.region = region;
         this.value = value;
-        this.latlng = Arrays.stream(latlng).sequential().toString();
+        this.latlng = Arrays.stream(latlng)
+                .mapToObj(String::valueOf)
+                .collect(Collectors.joining(","));
     }
 
     @OneToOne(mappedBy = "location")
