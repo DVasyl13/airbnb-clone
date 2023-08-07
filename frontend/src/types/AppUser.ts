@@ -3,5 +3,6 @@ export interface AppUser {
     name: string
     image: string
     email: string
+    createdAt: Date
     favoriteIds: String[]
 }

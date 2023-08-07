@@ -8,6 +8,7 @@ import {useNavigate} from "react-router-dom";
 import {AppUser} from "../../types/AppUser";
 import {Reservation} from "../../types/Reservation";
 import {Listing} from "../../types/Listing";
+import {ILocation} from "../../types/Location";
 
 interface ListingCardProps {
     data: Listing;
@@ -30,8 +31,8 @@ const ListingCard: React.FC<ListingCardProps> = ({
 }) => {
     const navigator = useNavigate();
     const { getByValue } = useCountries();
-
-    const location = getByValue(data.locationValue);
+    const locationData : ILocation = data.location;
+    const location = getByValue(locationData.value);
 
     const handleCancel = useCallback(
         (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -71,12 +72,12 @@ const ListingCard: React.FC<ListingCardProps> = ({
             <div className="flex flex-col gap-2 w-full">
                 <div
                     className="
-            aspect-square
-            w-full
-            relative
-            overflow-hidden
-            rounded-xl
-          "
+                        aspect-square
+                        w-full
+                        relative
+                        overflow-hidden
+                        rounded-xl
+                    "
                 >
                     <img
                         className="object-cover h-full w-full group-hover:scale-110 transition"

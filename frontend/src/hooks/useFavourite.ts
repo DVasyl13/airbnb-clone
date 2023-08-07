@@ -1,9 +1,11 @@
-import { useCallback, useMemo } from "react";
+import React, { useCallback, useMemo } from "react";
 import { toast } from "react-hot-toast";
 
 import useLoginModal from "./useLoginModal";
 import {AppUser} from "../types/AppUser";
 import {useNavigate} from "react-router-dom";
+import deleteListingFromFavourite from "../api/deleteListingFromFavourite";
+import addListingFromFavourite from "../api/addListingFromFavourite";
 
 interface IUseFavorite {
     listingId: string;
@@ -11,8 +13,7 @@ interface IUseFavorite {
 }
 
 const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
-    const navigator = useNavigate();
-
+    //const navigator = useNavigate();
     const loginModal = useLoginModal();
 
     const hasFavorited = useMemo(() => {
@@ -30,18 +31,16 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
 
             try {
                 let request;
+                //TODO: request is working correctly but HurtButton shows only after refreshing page
 
                 if (hasFavorited) {
-                    request = () => {};
-                        // axios.delete(`/api/favorites/${listingId}`);
+                    request = () => deleteListingFromFavourite(listingId);
                 } else {
-                    request = () => {};
-                        // axios.post(`/api/favorites/${listingId}`);
+                    request = () => addListingFromFavourite(listingId);
                 }
 
                 await request();
-                navigator(0)
-                toast.success('Success');
+                //navigator(0);
             } catch (error) {
                 toast.error('Something went wrong.');
             }

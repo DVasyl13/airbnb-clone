@@ -1,3 +1,5 @@
+import {ILocation} from "./Location";
+
 export interface Listing {
     id: string
     title: string
@@ -7,7 +9,7 @@ export interface Listing {
     roomCount: number
     bathroomCount: number
     guestCount: number
-    locationValue: string
+    location: ILocation
 
     price: number
 }

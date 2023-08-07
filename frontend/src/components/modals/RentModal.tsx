@@ -15,8 +15,9 @@ import ImageUpload from '../inputs/ImageUpload';
 import Input from '../inputs/Input';
 import Heading from '../Heading';
 import useRentModal from "../../hooks/useRentModal";
-import createListing from "../../api/listing";
+import createListing from "../../api/createListing";
 import {toast} from "react-hot-toast";
+import {useNavigate} from "react-router-dom";
 
 enum STEPS {
     CATEGORY = 0,
@@ -29,7 +30,7 @@ enum STEPS {
 
 const RentModal = () => {
     const rentModal = useRentModal();
-
+    const navigator = useNavigate();
     const [isLoading, setIsLoading] = useState(false);
     const [step, setStep] = useState(STEPS.CATEGORY);
 
@@ -88,7 +89,7 @@ const RentModal = () => {
 
         createListing(data).then(() => {
             toast.success('Listing created!');
-            //router.refresh();
+            navigator(0);
             reset();
             setStep(STEPS.CATEGORY)
             rentModal.onClose();

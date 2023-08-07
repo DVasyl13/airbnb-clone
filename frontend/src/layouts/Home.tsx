@@ -1,36 +1,29 @@
 import React, {useEffect, useState} from 'react';
 import Container from '../components/Container';
-import getCurrentUser from "../actions/getCurrentUser";
-import {AppUser} from "../types/AppUser";
 import ListingCard from "../components/listing/ListingCard";
 import getListings, {IListingsParams} from "../actions/getListings";
 import EmptyState from "../components/EmptyState";
+import {useUser} from "../hooks/useUser";
 
 interface HomeProps {
-    // searchParams: IListingsParams
+    searchParams: IListingsParams
 };
 
-const Home = () => {
+const Home =  () => {
     const [listings, setListings] = useState([]);
-    const [currentUser, setCurrentUser] = useState<AppUser>();
+    const userContext = useUser();
 
     //TODO: uncomment
 
-    // useEffect(() => {
-    //     const fetchListings = async () => {
-    //         const listings = await getListings(searchParams);
-    //         //setListings(listings);
-    //     };
-    //     fetchListings();
-    // }, [searchParams]);
-    //
-    // useEffect(() => {
-    //     const fetchCurrentUser = async () => {
-    //         const currentUser = await getCurrentUser();
-    //         setCurrentUser(currentUser.responseBody);
-    //     };
-    //     fetchCurrentUser();
-    // }, []);
+    useEffect(() => {
+        const fetchListings = async () => {
+            const lists = await getListings();
+            setListings(lists);
+        };
+        fetchListings();
+    }, []);
+
+
 
     if (listings.length === 0) {
         return (
@@ -43,7 +36,7 @@ const Home = () => {
         <Container>
             <div
                 className="
-                    pt-24
+                    pt-60
                     grid
                     grid-cols-1
                     sm:grid-cols-2
@@ -54,10 +47,9 @@ const Home = () => {
                     gap-8
                 "
             >
-                <p>spfasfas</p>
                 {listings.map((listing: any) => (
                     <ListingCard
-                        currentUser={currentUser}
+                        currentUser={userContext.user}
                         key={listing.id}
                         data={listing}
                     />
