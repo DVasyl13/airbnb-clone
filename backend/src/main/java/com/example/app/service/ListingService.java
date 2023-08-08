@@ -50,13 +50,7 @@ public class ListingService {
     @Transactional
     public List<ListingDto> getAllListings() {
         var listings = listingRepository.findAll();
-        return listings.stream().map(l -> new ListingDto( l.getId(),
-                l.getPrice(), l.getTitle(),
-                l.getDescription(), Mapper.mapLocation(l.getLocation()),
-                l.getCategory(), l.getRoomCount(),
-                l.getGuestCount(), l.getBathroomCount(),
-                l.getImageSrc()
-        )).collect(Collectors.toList());
+        return listings.stream().map(Mapper::mapListing).collect(Collectors.toList());
     }
 
     @Transactional
@@ -73,5 +67,11 @@ public class ListingService {
         Listing listing = listingRepository.findById(id).orElseThrow();
         user.getFavourites().remove(listing);
         return listing.getId();
+    }
+
+    @Transactional
+    public ListingDto getListingById(Long id) {
+        var listing = listingRepository.findById(id).orElseThrow();
+        return Mapper.mapListing(listing);
     }
 }

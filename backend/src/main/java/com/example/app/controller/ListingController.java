@@ -23,4 +23,9 @@ public class ListingController {
     public ResponseEntity<List<ListingDto>> getListing() {
         return ResponseEntity.ok(listingService.getAllListings());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<ListingDto> getListingById(@PathVariable Long id) {
+        return ResponseEntity.ok(listingService.getListingById(id));
+    }
 }
