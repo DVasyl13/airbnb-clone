@@ -10,6 +10,7 @@ export interface Listing {
     bathroomCount: number
     guestCount: number
     location: ILocation
-
+    createdAt: Date
+    updatedAt: Date
     price: number
 }
