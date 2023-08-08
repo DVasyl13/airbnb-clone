@@ -7,6 +7,5 @@ export default async function deleteListingFromFavourite(listingId: string) {
         },
     });
     const responseBody = await response.json();
-    console.log(responseBody);
     return {response, responseBody};
 }

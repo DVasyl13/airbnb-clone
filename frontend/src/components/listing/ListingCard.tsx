@@ -90,10 +90,10 @@ const ListingCard: React.FC<ListingCardProps> = ({
                             top-3
                             right-3
                     ">
-                        <HeartButton
+                        { currentUser ?  <HeartButton
                             listingId={data.id}
                             currentUser={currentUser}
-                        />
+                        /> : <></> }
                     </div>
                 </div>
                 <div className="font-semibold text-lg">

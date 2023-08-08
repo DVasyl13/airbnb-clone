@@ -1,9 +1,9 @@
 import React, {useEffect, useState} from 'react';
-import Container from '../components/Container';
-import ListingCard from "../components/listing/ListingCard";
-import getListings, {IListingsParams} from "../actions/getListings";
-import EmptyState from "../components/EmptyState";
-import {useUser} from "../hooks/useUser";
+import Container from '../../components/Container';
+import ListingCard from "../../components/listing/ListingCard";
+import getListings, {IListingsParams} from "../../actions/getListings";
+import EmptyState from "../../components/EmptyState";
+import {useUser} from "../../hooks/useUser";
 
 interface HomeProps {
     searchParams: IListingsParams
@@ -12,8 +12,6 @@ interface HomeProps {
 const Home =  () => {
     const [listings, setListings] = useState([]);
     const userContext = useUser();
-
-    //TODO: uncomment
 
     useEffect(() => {
         const fetchListings = async () => {

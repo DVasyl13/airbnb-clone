@@ -1,5 +1,5 @@
-import React, { useCallback, useMemo } from "react";
-import { toast } from "react-hot-toast";
+import React, {useCallback, useMemo, useState} from "react";
+import {toast} from "react-hot-toast";
 
 import useLoginModal from "./useLoginModal";
 import {AppUser} from "../types/AppUser";
@@ -12,15 +12,12 @@ interface IUseFavorite {
     currentUser?: AppUser | null
 }
 
-const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
-    //const navigator = useNavigate();
+const useFavorite = ({listingId, currentUser}: IUseFavorite) => {
     const loginModal = useLoginModal();
 
-    const hasFavorited = useMemo(() => {
-        const list = currentUser?.favoriteIds || [];
-
-        return list.includes(listingId);
-    }, [currentUser, listingId]);
+    const [hasFavourite, setHasFavourite] = useState(
+        currentUser?.favoriteIds.includes(listingId) || false
+    );
 
     const toggleFavorite = useCallback(async (e: React.MouseEvent<HTMLDivElement>) => {
             e.stopPropagation();
@@ -30,33 +27,28 @@ const useFavorite = ({ listingId, currentUser }: IUseFavorite) => {
             }
 
             try {
-                let request;
-                //TODO: request is working correctly but HurtButton shows only after refreshing page
-
-                if (hasFavorited) {
-                    request = () => deleteListingFromFavourite(listingId);
+                if (hasFavourite) {
+                    await deleteListingFromFavourite(listingId);
+                    const indexToRemove = currentUser.favoriteIds.indexOf(listingId);
+                    if (indexToRemove !== -1) {
+                        currentUser.favoriteIds.splice(indexToRemove, 1);
+                    }
                 } else {
-                    request = () => addListingFromFavourite(listingId);
+                    await addListingFromFavourite(listingId);
+                    currentUser.favoriteIds.push(listingId);
                 }
-
-                await request();
-                //navigator(0);
+                setHasFavourite((prevHasFavorited) => !prevHasFavorited);
             } catch (error) {
-                toast.error('Something went wrong.');
+                toast.error("Something went wrong.");
             }
         },
-        [
-            currentUser,
-            hasFavorited,
-            listingId,
-            loginModal,
-            navigator
-        ]);
+        [currentUser, hasFavourite, listingId, loginModal]
+    );
 
     return {
-        hasFavorited,
+        hasFavourite,
         toggleFavorite,
-    }
+    };
 }
 
 export default useFavorite;
