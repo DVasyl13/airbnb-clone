@@ -10,6 +10,7 @@ import {useSignOut} from "react-auth-kit";
 import {useUser} from "../../hooks/useUser";
 import {toast} from "react-hot-toast";
 import useRentModal from "../../hooks/useRentModal";
+import {useNavigate} from "react-router-dom";
 
 interface UserMenuProps {
     currentUser?: AppUser | null
@@ -19,6 +20,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
    currentUser
 }) => {
     const signOut = useSignOut();
+    const navigator = useNavigate();
     const loginModal = useLoginModal();
     const userContext = useUser();
     const registerModal = useRegisterModal();
@@ -111,7 +113,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
                             <>
                                 <MenuItem
                                     label="My trips"
-                                    onClick={() => {}}
+                                    onClick={() => navigator("/trips")}
                                 />
                                 <MenuItem
                                     label="My favorites"

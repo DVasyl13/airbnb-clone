@@ -9,7 +9,6 @@ import getReservations from "../../actions/getReservations";
 
 const ListingPage = () => {
     const userContext = useUser();
-    const id = window.location.pathname.split('/').pop();
     const [listing, setListing] = useState<Listing | undefined>(undefined);
     const [reservation, setReservation] = useState<Reservation[] | undefined>(undefined);
 

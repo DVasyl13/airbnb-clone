@@ -1,6 +1,6 @@
 export default async function getListings() {
     try {
-        const response = await fetch("http://localhost:8080/api/v1/listing", {
+        const response = await fetch("http://localhost:8080/api/v1/listing/all", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',

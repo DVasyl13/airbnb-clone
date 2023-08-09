@@ -68,7 +68,7 @@ const ListingClient: React.FC<ListingClientProps> = ({
                 totalPrice,
                 startDate: dateRange.startDate,
                 endDate: dateRange.endDate,
-                listingId: listing?.id
+                id: listing?.id
             })
                 .then(() => {
                     toast.success('Listing reserved!');
