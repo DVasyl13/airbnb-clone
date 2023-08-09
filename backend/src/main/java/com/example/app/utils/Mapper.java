@@ -1,9 +1,7 @@
 package com.example.app.utils;
 
 import com.example.app.auth.dto.UserDto;
-import com.example.app.controller.dto.ListingDto;
-import com.example.app.controller.dto.LocationDto;
-import com.example.app.controller.dto.ReservationDto;
+import com.example.app.controller.dto.*;
 import com.example.app.entity.Listing;
 import com.example.app.entity.Location;
 import com.example.app.entity.Reservation;
@@ -62,13 +60,23 @@ public class Mapper {
         );
     }
 
+    public static ReservationExtendedDto mapReservationExtended(Reservation reservation) {
+        return new ReservationExtendedDto(
+                reservation.getId(), reservation.getStartDate(),
+                reservation.getEndDate(), reservation.getTotalPrice(),
+                reservation.getCreatedAt(), mapListing(reservation.getListing())
+        );
+    }
+
     public static ListingDto mapListing(Listing l) {
+        var user = l.getUser();
         return new ListingDto( l.getId(),
                 l.getPrice(), l.getTitle(),
                 l.getDescription(), Mapper.mapLocation(l.getLocation()),
                 l.getCategory(), l.getRoomCount(),
                 l.getGuestCount(), l.getBathroomCount(),
-                l.getCreatedAt() , l.getImageSrc()
+                l.getCreatedAt() , l.getImageSrc(),
+                new UserSmallDto(user.getId(), user.getName(), user.getImage())
         );
     }
 }

@@ -1,13 +1,12 @@
 package com.example.app.controller;
 
 import com.example.app.controller.dto.ReservationDto;
+import com.example.app.controller.dto.ReservationExtendedDto;
 import com.example.app.service.ReservationService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,8 +16,19 @@ import java.util.List;
 public class ReservationController {
     private final ReservationService reservationService;
 
-    @GetMapping("/{id}")
-    public ResponseEntity<List<ReservationDto>> getReservationsById(@PathVariable Long id) {
+    @GetMapping("/listing/{id}")
+    public ResponseEntity<List<ReservationDto>> getReservationsByListingId(@PathVariable Long id) {
         return ResponseEntity.ok(reservationService.getReservationsById(id));
+    }
+
+    @GetMapping
+    public ResponseEntity<List<ReservationExtendedDto>> getReservationsByUser(HttpServletRequest request) {
+        return ResponseEntity.ok(reservationService.getReservationsByUser(request));
+    }
+
+    @PostMapping
+    public ResponseEntity<ReservationDto> saveReservation(@RequestBody ReservationDto reservationDto,
+                                                          HttpServletRequest request) {
+        return ResponseEntity.ok(reservationService.saveReservation(reservationDto, request));
     }
 }

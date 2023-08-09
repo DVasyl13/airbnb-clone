@@ -16,10 +16,10 @@ public class ListingController {
     private final ListingService listingService;
 
     @PostMapping
-    public ResponseEntity<ListingDto> saveListing(@RequestBody ListingDto requestBody, HttpServletRequest request ) {
+    public ResponseEntity<ListingDto> saveListing(@RequestBody ListingDto requestBody, HttpServletRequest request) {
         return ResponseEntity.ok(listingService.saveListing(requestBody, request));
     }
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<ListingDto>> getListing() {
         return ResponseEntity.ok(listingService.getAllListings());
     }
