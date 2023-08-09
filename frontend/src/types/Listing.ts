@@ -1,4 +1,5 @@
 import {ILocation} from "./Location";
+import {SmallUser} from "./SmallUser";
 
 export interface Listing {
     id: string
@@ -13,4 +14,5 @@ export interface Listing {
     createdAt: Date
     updatedAt: Date
     price: number
+    user: SmallUser
 }
