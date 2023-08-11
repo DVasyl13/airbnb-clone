@@ -52,15 +52,15 @@ public class Listing {
     @JsonManagedReference
     private User user;
 
-    @ManyToMany(mappedBy = "favourites")
+    @ManyToMany(mappedBy = "favourites", cascade = CascadeType.ALL)
     @JsonBackReference
     private Set<User> users;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "location_id", referencedColumnName = "id")
     private Location location;
 
-    @OneToMany(mappedBy = "listing")
+    @OneToMany(mappedBy = "listing", cascade = CascadeType.ALL)
     @JsonBackReference
     @JsonIgnore
     private Set<Reservation> reservations;

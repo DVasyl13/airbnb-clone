@@ -74,4 +74,26 @@ public class ListingService {
         var listing = listingRepository.findById(id).orElseThrow();
         return Mapper.mapListing(listing);
     }
+
+    @Transactional
+    public List<ListingDto> getUserFavouriteListings(HttpServletRequest request) {
+        User user = userService.getUserFromJwt(request);
+        return user.getFavourites().stream()
+                .map(Mapper::mapListing)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public Long deleteListing(Long id, HttpServletRequest request) {
+        listingRepository.deleteById(id);
+        return id;
+    }
+
+    @Transactional
+    public List<ListingDto> getUserListings(HttpServletRequest request) {
+        User user = userService.getUserFromJwt(request);
+        return user.getListings().stream()
+                .map(Mapper::mapListing)
+                .collect(Collectors.toList());
+    }
 }

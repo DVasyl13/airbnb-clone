@@ -52,7 +52,8 @@ public class ReservationService {
         User user = userService.getUserFromJwt(request);
         Reservation reservation = resRepository.findById(id).orElseThrow();
         user.getReservations().remove(reservation);
-        return reservation.getId();
+        resRepository.delete(reservation);
+        return id;
     }
 
     @Transactional
@@ -60,6 +61,15 @@ public class ReservationService {
         User user = userService.getUserFromJwt(request);
         return user.getReservations()
                 .stream()
+                .map(Mapper::mapReservationExtended)
+                .collect(Collectors.toList());
+    }
+
+    @Transactional
+    public List<ReservationExtendedDto> getReservationsByUsersListings(HttpServletRequest request) {
+        User user = userService.getUserFromJwt(request);
+        return user.getListings().stream()
+                .flatMap(listing -> listing.getReservations().stream())
                 .map(Mapper::mapReservationExtended)
                 .collect(Collectors.toList());
     }

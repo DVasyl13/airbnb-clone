@@ -42,12 +42,12 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     @JsonBackReference
     @JsonIgnore
     private Set<Token> tokens;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
     @JsonIgnore
     private Set<Listing> listings;
@@ -61,7 +61,7 @@ public class User implements UserDetails {
     @JsonManagedReference
     private Set<Listing> favourites;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JsonBackReference
     @JsonIgnore
     private Set<Reservation> reservations;

@@ -54,7 +54,7 @@ public class AuthenticationService {
         String refreshToken = jwtService.generateRefreshToken(user);
         saveUserToken(savedUser, jwtToken);
         //publisher.publishEvent(new RegistrationCompleteEvent(user, jwtToken, getApplicationUrl(httpRequest)));
-        return new AuthenticationResponse(jwtToken, refreshToken, Mapper.mapUser(savedUser, null));
+        return new AuthenticationResponse(jwtToken, refreshToken, Mapper.mapUser(savedUser, new Long[]{}));
     }
 
 //    private String getApplicationUrl(HttpServletRequest request) {
