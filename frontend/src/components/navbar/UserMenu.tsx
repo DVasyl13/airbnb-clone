@@ -38,6 +38,7 @@ const UserMenu: React.FC<UserMenuProps> = ({
         userContext.setUser(null);
         signOut();
         toast.success('Now you logged out!');
+        navigator('/');
         //TODO: make a call to logout on Backend also
     }
 
@@ -117,19 +118,22 @@ const UserMenu: React.FC<UserMenuProps> = ({
                                 />
                                 <MenuItem
                                     label="My favorites"
-                                    onClick={() => {}}
+                                    onClick={() => navigator("/favourites")}
                                 />
                                 <MenuItem
                                     label="My reservations"
-                                    onClick={() => {}}
+                                    onClick={() => navigator("/reservations")}
                                 />
                                 <MenuItem
                                     label="My properties"
-                                    onClick={() => {}}
+                                    onClick={() => navigator("/properties")}
                                 />
                                 <MenuItem
                                     label="Airbnb your home"
-                                    onClick={() => {}}
+                                    onClick={() => {
+                                        navigator("/");
+                                        rentModal.onOpen();
+                                    }}
                                 />
                                 <hr />
                                 <MenuItem

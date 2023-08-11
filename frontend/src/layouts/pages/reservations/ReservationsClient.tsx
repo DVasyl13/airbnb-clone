@@ -1,45 +1,60 @@
-import ListingCard from "../../components/listing/ListingCard";
-import Heading from "../../components/Heading";
-import Container from "../../components/Container";
-import {useNavigate} from "react-router-dom";
+import ListingCard from "../../../components/listing/ListingCard";
+import Container from "../../../components/Container";
+import Heading from "../../../components/Heading";
 import React, {useCallback, useState} from "react";
-import {AppUser} from "../../types/AppUser";
-import {Reservation} from "../../types/Reservation";
+import {useNavigate} from "react-router-dom";
+import {AppUser} from "../../../types/AppUser";
+import {Reservation} from "../../../types/Reservation";
+import EmptyState from "../../../components/EmptyState";
 import {toast} from "react-hot-toast";
-import deleteReservation from "../../api/deleteReservation";
+import deleteReservation from "../../../api/deleteReservation";
 
-interface TripsClientProps {
+interface ReservationsClientProps {
     reservations: Reservation[],
     currentUser?: AppUser | null,
+    removeReservation: (id: string) => void;
 }
 
-const TripsClient: React.FC<TripsClientProps> = ({
-     reservations,
-     currentUser
+const ReservationsClient: React.FC<ReservationsClientProps> = ({
+   reservations,
+   currentUser,
+   removeReservation
 }) => {
     const navigator = useNavigate();
     const [deletingId, setDeletingId] = useState('');
 
-    //TODO: not deleting :(
     const onCancel = useCallback((id: string) => {
         setDeletingId(id);
-        deleteReservation(id).then(() => {
-            toast.success('Reservation cancelled');
-            navigator(0);
-        })
-            .catch((error) => {
-                toast.error(error?.response?.data?.error)
+
+        deleteReservation(id)
+            .then(() => {
+                toast.success('Reservation cancelled');
+                removeReservation(id);
+            })
+            .catch(() => {
+                toast.error('Something went wrong.')
             })
             .finally(() => {
                 setDeletingId('');
-            });
+            })
+
     }, [navigator]);
+
+    if (reservations.length === 0) {
+        return (
+            <EmptyState
+                title="No reservations found"
+                subtitle="Looks like you have no reservations on your properties."
+            />
+        );
+    }
 
     return (
         <Container>
+            <br/><br/><br/><br/><br/>
             <Heading
-                title="Trips"
-                subtitle="Where you've been and where you're going"
+                title="Reservations"
+                subtitle="Bookings on your properties"
             />
             <div
                 className="
@@ -62,7 +77,7 @@ const TripsClient: React.FC<TripsClientProps> = ({
                         actionId={reservation.id}
                         onAction={onCancel}
                         disabled={deletingId === reservation.id}
-                        actionLabel="Cancel reservation"
+                        actionLabel="Cancel guest reservation"
                         currentUser={currentUser}
                     />
                 ))}
@@ -71,4 +86,4 @@ const TripsClient: React.FC<TripsClientProps> = ({
     );
 }
 
-export default TripsClient;
+export default ReservationsClient;

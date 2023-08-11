@@ -1,11 +1,12 @@
 import {Listing} from "../types/Listing";
 
-export default async function getListings() {
+export default async function getUserListings() {
     try {
-        const response = await fetch("http://localhost:8080/api/v1/listing/all", {
+        const response = await fetch("http://localhost:8080/api/v1/user/listing", {
             method: "GET",
             headers: {
                 'Content-Type': 'application/json',
+                'Authorization': 'Bearer ' + sessionStorage.getItem('jwt')
             }
         });
         const responseBody : Listing[] = await response.json();
@@ -14,5 +15,4 @@ export default async function getListings() {
     } catch (e) {
         console.log("Error:" + e)
     }
-
 }

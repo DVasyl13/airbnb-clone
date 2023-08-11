@@ -4,8 +4,11 @@ import {RequireAuth} from "react-auth-kit";
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import RootLayout from "./layouts/RootLayout";
 import Home from "./layouts/pages/Home";
-import ListingPage from "./layouts/pages/ListingPage";
-import Trips from "./layouts/pages/Trips";
+import ListingPage from "./layouts/pages/listing/ListingPage";
+import Trips from "./layouts/pages/trips/Trips";
+import ReservationsPage from "./layouts/pages/reservations/ReservationsPage";
+import FavouritePage from "./layouts/pages/favourites/FavouritePage";
+import PropertiesPage from "./layouts/pages/properties/PropertiesPage";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +24,27 @@ const router = createBrowserRouter([
               </Fragment>
             </RequireAuth>
         ) },
+      { path: '/reservations', element: (
+            <RequireAuth loginPath="/">
+              <Fragment>
+                <ReservationsPage />
+              </Fragment>
+            </RequireAuth>
+        ) },
+        { path: '/favourites', element: (
+                <RequireAuth loginPath="/">
+                    <Fragment>
+                        <FavouritePage />
+                    </Fragment>
+                </RequireAuth>
+            ) },
+        { path: '/properties', element: (
+                <RequireAuth loginPath="/">
+                    <Fragment>
+                        <PropertiesPage />
+                    </Fragment>
+                </RequireAuth>
+            ) },
     ]
   }
 ]);

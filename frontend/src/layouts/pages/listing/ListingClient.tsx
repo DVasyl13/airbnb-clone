@@ -1,17 +1,17 @@
 import React, {useCallback, useEffect, useMemo, useState} from 'react';
-import {Reservation} from "../../types/Reservation";
-import {Listing} from "../../types/Listing";
-import {AppUser} from "../../types/AppUser";
+import {Reservation} from "../../../types/Reservation";
+import {Listing} from "../../../types/Listing";
+import {AppUser} from "../../../types/AppUser";
 import {Range} from "react-date-range"
-import {categories} from "../../components/navbar/Categories";
-import useLoginModal from "../../hooks/useLoginModal";
+import {categories} from "../../../components/navbar/Categories";
+import useLoginModal from "../../../hooks/useLoginModal";
 import {useNavigate} from "react-router-dom";
 import {differenceInDays, eachDayOfInterval} from "date-fns";
-import Container from "../../components/Container";
-import ListingHead from "../../components/listing/ListingHead";
-import ListingInfo from "../../components/listing/ListingInfo";
-import ListingReservation from "../../components/listing/ListingReservation";
-import createReservation from "../../api/createReservation";
+import Container from "../../../components/Container";
+import ListingHead from "../../../components/listing/ListingHead";
+import ListingInfo from "../../../components/listing/ListingInfo";
+import ListingReservation from "../../../components/listing/ListingReservation";
+import createReservation from "../../../api/createReservation";
 import {toast} from "react-hot-toast";
 
 const initialDateRange = {

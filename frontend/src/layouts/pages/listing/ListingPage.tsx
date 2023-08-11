@@ -1,11 +1,11 @@
 import React, {useEffect, useState} from 'react';
-import getListingById from "../../actions/getListingById";
-import {useUser} from "../../hooks/useUser";
-import EmptyState from "../../components/EmptyState";
+import getListingById from "../../../actions/getListingById";
+import {useUser} from "../../../hooks/useUser";
+import EmptyState from "../../../components/EmptyState";
 import ListingClient from "./ListingClient";
-import {Listing} from "../../types/Listing";
-import {Reservation} from "../../types/Reservation";
-import getReservations from "../../actions/getReservations";
+import {Listing} from "../../../types/Listing";
+import {Reservation} from "../../../types/Reservation";
+import getReservations from "../../../actions/getReservations";
 
 const ListingPage = () => {
     const userContext = useUser();
