@@ -8,6 +8,7 @@ import getCurrentUser from "../actions/getCurrentUser";
 import {toast} from "react-hot-toast";
 import ToasterProvider from "../storage/ToasterProvider";
 import RentModal from "../components/modals/RentModal";
+import SearchModal from "../components/modals/SearchModal";
 
 const RootLayout = () => {
     const userContext = useUser();
@@ -27,6 +28,7 @@ const RootLayout = () => {
         <ToasterProvider/>
         <RentModal/>
         <LoginModal/>
+        <SearchModal />
         <RegisterModal/>
         <Navbar currentUser={userContext.user} />
         <main>

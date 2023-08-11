@@ -6,6 +6,8 @@ import EmptyState from "../../components/EmptyState";
 import {useUser} from "../../hooks/useUser";
 import {useLocation} from "react-router-dom";
 import {Listing} from "../../types/Listing";
+import qs from 'query-string';
+
 const Home = () => {
     const [listings, setListings] = useState<Listing[] | undefined>(undefined);
     const userContext = useUser();
@@ -30,12 +32,19 @@ const Home = () => {
         );
     }
 
-    const queryParams = new URLSearchParams(location.search);
-    const selectedCategory = queryParams.get('category');
+    const queryParams = qs.parse(location.search);
 
-    const filteredListings = selectedCategory
-        ? listings.filter((listing) => listing.category === selectedCategory)
-        : listings;
+    const filteredListings = listings.filter(listing => {
+        const { category, bathroomCount, guestCount, locationValue, roomCount } = queryParams;
+        return (
+            (!category || listing.category === category) &&
+            (!bathroomCount || listing.bathroomCount.toString() >= bathroomCount) &&
+            (!guestCount || listing.guestCount.toString() >= guestCount) &&
+            (!locationValue || listing.location.value === locationValue) &&
+            (!roomCount || listing.roomCount.toString() >= roomCount)
+        );
+    });
+
 
     if (filteredListings.length === 0) {
         return <EmptyState showReset/>;
