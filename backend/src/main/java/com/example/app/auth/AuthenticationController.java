@@ -3,6 +3,7 @@ package com.example.app.auth;
 import com.example.app.auth.dto.AuthenticationRequest;
 import com.example.app.auth.dto.AuthenticationResponse;
 import com.example.app.auth.dto.RegisterRequest;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/api/v1/auth")
 @RequiredArgsConstructor
+@Tag(name = "Authentication")
 public class AuthenticationController {
     private final AuthenticationService service;
 
