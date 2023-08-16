@@ -46,20 +46,20 @@ const RegisterModal = () => {
         setIsLoading(true);
 
         doRegister(data).then(({ response, responseBody }) => {
-            sessionStorage.setItem("jwt", responseBody.token);
-            sessionStorage.setItem("rjwt", responseBody.refreshToken);
-            userContext.setUser(responseBody.user);
-
-            signIn({
-                token: responseBody.token,
-                expiresIn: 3600 * 24,
-                tokenType: "Bearer",
-                authState: {email: data.email},
-            });
-
-            toast.success('Registered!');
+            // sessionStorage.setItem("jwt", responseBody.token);
+            // sessionStorage.setItem("rjwt", responseBody.refreshToken);
+            // userContext.setUser(responseBody.user);
+            //
+            // signIn({
+            //     token: responseBody.token,
+            //     expiresIn: 3600 * 24,
+            //     tokenType: "Bearer",
+            //     authState: {email: data.email},
+            // });
+            //
+            toast.success('We have sent you an email for verification!');
             registerModal.onClose();
-            //loginModal.onOpen();
+            loginModal.onOpen();
         }).catch((error) => {
             toast.error(error);
         }).finally(() => {

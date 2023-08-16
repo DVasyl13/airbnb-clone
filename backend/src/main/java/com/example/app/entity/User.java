@@ -70,6 +70,7 @@ public class User implements UserDetails {
         this.id = id;
     }
 
+    //For creation and then persisting to the DB
     public User(String name,
                 String password,
                 String email,

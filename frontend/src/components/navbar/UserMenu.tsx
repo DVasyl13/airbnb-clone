@@ -32,14 +32,24 @@ const UserMenu: React.FC<UserMenuProps> = ({
         setIsOpen((value) => !value);
     }, []);
 
-    const logOut = () => {
+    const logOut = async () => {
+        try {
+            await fetch("http://localhost:8080/api/v1/auth/logout", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': 'Bearer ' + sessionStorage.getItem('jwt'),
+                }
+            });
+        } catch (e) {
+            console.log(e);
+        }
         sessionStorage.removeItem('jwt');
         sessionStorage.removeItem('rjwt');
         userContext.setUser(null);
         signOut();
         toast.success('Now you logged out!');
         navigator('/');
-        //TODO: make a call to logout on Backend also
     }
 
     const onRent = useCallback(() => {

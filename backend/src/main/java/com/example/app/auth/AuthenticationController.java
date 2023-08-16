@@ -41,9 +41,9 @@ public class AuthenticationController {
         service.refreshToken(request, response);
     }
 
-    //@GetMapping("/register/verifyEmail")
-    //public ResponseEntity<String> verifyEmail(@RequestParam("token") String token){
-    //    service.verifyEmail(token);
-    //    return ResponseEntity.ok("Email was verified");
-    //}
+    @GetMapping("/register/confirm")
+    public ResponseEntity<String> verifyEmail(@RequestParam("token") String token){
+        service.verifyEmail(token);
+        return ResponseEntity.ok("Email was verified");
+    }
 }
