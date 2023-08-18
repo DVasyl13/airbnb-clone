@@ -27,6 +27,7 @@ public class Listing {
     private Date createdAt;
     private int guestCount;
     private int bathroomCount;
+    @Column(name = "image")
     private String imageSrc;
     public Listing(double price,
                    String title,
