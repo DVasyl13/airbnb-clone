@@ -25,8 +25,6 @@ const RegisterModal = () => {
     const registerModal = useRegisterModal();
     const loginModal = useLoginModal();
     const [isLoading, setIsLoading] = useState(false);
-    const signIn = useSignIn();
-    const userContext = useUser();
 
     const {
         register,
@@ -45,18 +43,7 @@ const RegisterModal = () => {
     const onSubmit: SubmitHandler<FieldValues> = (data) => {
         setIsLoading(true);
 
-        doRegister(data).then(({ response, responseBody }) => {
-            // sessionStorage.setItem("jwt", responseBody.token);
-            // sessionStorage.setItem("rjwt", responseBody.refreshToken);
-            // userContext.setUser(responseBody.user);
-            //
-            // signIn({
-            //     token: responseBody.token,
-            //     expiresIn: 3600 * 24,
-            //     tokenType: "Bearer",
-            //     authState: {email: data.email},
-            // });
-            //
+        doRegister(data).then(() => {
             toast.success('We have sent you an email for verification!');
             registerModal.onClose();
             loginModal.onOpen();
