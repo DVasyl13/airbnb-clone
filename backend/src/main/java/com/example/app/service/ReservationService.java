@@ -10,6 +10,9 @@ import com.example.app.repository.ReservationRepository;
 import com.example.app.utils.Mapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,7 +28,7 @@ public class ReservationService {
     private final UserService userService;
 
     @Transactional
-    public List<ReservationDto> getReservationsById(Long id) {
+    public List<ReservationDto> getReservationsByListingId(Long id) {
         return resRepository.findByListingId(id)
                 .stream()
                 .map(Mapper::mapReservation)

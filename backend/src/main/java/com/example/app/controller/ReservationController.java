@@ -20,7 +20,7 @@ public class ReservationController {
 
     @GetMapping("/listing/{id}")
     public ResponseEntity<List<ReservationDto>> getReservationsByListingId(@PathVariable Long id) {
-        return ResponseEntity.ok(reservationService.getReservationsById(id));
+        return ResponseEntity.ok(reservationService.getReservationsByListingId(id));
     }
 
     @GetMapping
