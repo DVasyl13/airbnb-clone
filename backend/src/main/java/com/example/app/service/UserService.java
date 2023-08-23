@@ -1,7 +1,7 @@
 package com.example.app.service;
 
-import com.example.app.entity.User;
 import com.example.app.exception.UserNotFoundException;
+import com.example.app.entity.User;
 import com.example.app.repository.UserRepository;
 import com.example.app.security.JwtService;
 import jakarta.servlet.http.HttpServletRequest;

@@ -1,18 +1,15 @@
 package com.example.app.service;
 
-import com.example.app.controller.dto.ReservationDto;
 import com.example.app.controller.dto.ReservationExtendedDto;
 import com.example.app.entity.Listing;
 import com.example.app.entity.Reservation;
-import com.example.app.entity.User;
 import com.example.app.repository.ListingRepository;
+import com.example.app.controller.dto.ReservationDto;
+import com.example.app.entity.User;
 import com.example.app.repository.ReservationRepository;
 import com.example.app.utils.Mapper;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.cache.annotation.CacheEvict;
-import org.springframework.cache.annotation.CachePut;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

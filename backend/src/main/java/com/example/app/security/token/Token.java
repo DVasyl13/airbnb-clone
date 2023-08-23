@@ -1,7 +1,6 @@
 package com.example.app.security.token;
 
 import com.example.app.entity.User;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;

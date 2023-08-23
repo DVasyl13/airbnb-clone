@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://postgres-sql:5432/postgres # localhost:5432 for manual in IDE
+    url: jdbc:postgresql://localhost:5432/postgres # localhost:5432 for manual in IDE | postgres-sql:5432 for docker image
     username: postgres
     password: postgres
   jpa:
@@ -30,6 +30,14 @@ spring:
     baseline-description: "init"
     baseline-version: 0
     default-schema: airbnb
+
+logging:
+  level:
+    net: DEBUG
+    org:
+      hibernate: ERROR
+      springframework:
+        web: INFO
 
 application:
   security:

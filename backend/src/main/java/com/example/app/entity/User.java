@@ -1,7 +1,7 @@
 package com.example.app.entity;
 
-import com.example.app.security.token.Token;
 import com.example.app.utils.UserRole;
+import com.example.app.security.token.Token;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;

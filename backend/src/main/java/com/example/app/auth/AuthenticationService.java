@@ -12,7 +12,6 @@ import com.example.app.security.JwtService;
 import com.example.app.security.token.Token;
 import com.example.app.security.token.TokenRepository;
 import com.example.app.security.token.TokenType;
-import com.example.app.service.UserService;
 import com.example.app.service.email.EmailSender;
 import com.example.app.utils.Mapper;
 import com.example.app.utils.UserRole;

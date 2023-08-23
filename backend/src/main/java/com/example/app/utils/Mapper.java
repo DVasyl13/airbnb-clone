@@ -1,11 +1,11 @@
 package com.example.app.utils;
 
-import com.example.app.auth.dto.UserDto;
 import com.example.app.controller.dto.*;
 import com.example.app.entity.Listing;
 import com.example.app.entity.Location;
 import com.example.app.entity.Reservation;
 import com.example.app.entity.User;
+import com.example.app.auth.dto.UserDto;
 
 import java.util.Arrays;
 
